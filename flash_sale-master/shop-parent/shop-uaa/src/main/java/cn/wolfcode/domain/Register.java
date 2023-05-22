@@ -1,10 +1,8 @@
 package cn.wolfcode.domain;
 
-import cn.wolfcode.common.CommonField;
+import cn.wolfcode.commonField.CommonField;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.Date;
 
 @Getter@Setter
 public class Register extends CommonField {
