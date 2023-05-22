@@ -16,14 +16,14 @@ public class LoginLog implements Serializable {
     public LoginLog(){
         super();
     }
-    public LoginLog(Long phone,String password,Date loginTime){
+    public LoginLog(Long phone,String loginIp,Date loginTime){
         this.phone = phone;
-        this.password = password;
+        this.loginIp = loginIp;
         this.loginTime = loginTime;
     }
     private Long id;//自增id
     private Long phone;//登陆用户的手机号码
-    private String password;//登录IP
+    private String loginIp;//登录IP
     private Date loginTime;///登录时间
     private Boolean state = LOGIN_SUCCESS;//登录状态
 }
