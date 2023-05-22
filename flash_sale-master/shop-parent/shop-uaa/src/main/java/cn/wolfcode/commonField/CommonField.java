@@ -1,4 +1,4 @@
-package cn.wolfcode.common;
+package cn.wolfcode.commonField;
 
 import lombok.Getter;
 import lombok.Setter;
