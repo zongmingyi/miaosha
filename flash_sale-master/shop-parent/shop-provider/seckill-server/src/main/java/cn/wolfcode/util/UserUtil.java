@@ -1,6 +1,5 @@
 package cn.wolfcode.util;
 
-import cn.wolfcode.common.domain.UserInfo;
 import cn.wolfcode.redis.CommonRedisKey;
 import com.alibaba.fastjson.JSON;
 import org.springframework.data.redis.core.StringRedisTemplate;

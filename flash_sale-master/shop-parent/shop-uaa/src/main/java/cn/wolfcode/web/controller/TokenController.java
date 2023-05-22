@@ -1,6 +1,5 @@
 package cn.wolfcode.web.controller;
 
-import ch.qos.logback.core.db.dialect.DBUtil;
 import cn.wolfcode.common.domain.UserInfo;
 import cn.wolfcode.common.web.Result;
 import cn.wolfcode.domain.UserLogin;

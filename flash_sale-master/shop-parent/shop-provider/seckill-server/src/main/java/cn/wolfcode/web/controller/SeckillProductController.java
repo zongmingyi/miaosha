@@ -1,7 +1,6 @@
 package cn.wolfcode.web.controller;
 
 import cn.wolfcode.common.web.Result;
-import cn.wolfcode.domain.SeckillProduct;
 import cn.wolfcode.domain.SeckillProductVo;
 import cn.wolfcode.service.ISeckillProductService;
 import lombok.extern.slf4j.Slf4j;

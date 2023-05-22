@@ -1,7 +1,6 @@
 package cn.wolfcode.common.web.interceptor;
 
 import cn.wolfcode.common.constants.CommonConstants;
-import cn.wolfcode.common.domain.UserInfo;
 import cn.wolfcode.common.web.CommonCodeMsg;
 import cn.wolfcode.common.web.Result;
 import cn.wolfcode.common.web.anno.RequireLogin;
