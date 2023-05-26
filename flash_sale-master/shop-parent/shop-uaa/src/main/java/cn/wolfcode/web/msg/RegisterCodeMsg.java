@@ -11,5 +11,6 @@ public class RegisterCodeMsg extends CodeMsg {
     public static final RegisterCodeMsg DUPLICATE_REGISTER = new RegisterCodeMsg(4000,"手机号已被注册");
     public static final RegisterCodeMsg PHONE_IS_NULL = new RegisterCodeMsg(4001,"手机号为空");
     public static final RegisterCodeMsg REGISTER_FAIL = new RegisterCodeMsg(4002,"注册账户失败");
-
+    public static final RegisterCodeMsg CAPTCHACODE_ERROR = new RegisterCodeMsg(4003,"验证码错误");
+    public static final RegisterCodeMsg REGISTER_SUCCESS = new RegisterCodeMsg(4004,"注册账户成功");
 }
