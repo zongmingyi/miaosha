@@ -8,5 +8,5 @@ public interface IRegisterService {
      * 注册用户
      * @param register 用户信息
      */
-    void register(Register register);
+    int register(Register register);
 }
