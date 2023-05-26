@@ -16,6 +16,7 @@
         <module>product-server</module>
         <module>seckill-server</module>
         <module>pay-server</module>
+        <module>personal-center-server</module>
     </modules>
     <dependencies>
         <dependency>

@@ -15,7 +15,7 @@
         <module>pay-api</module>
         <module>product-api</module>
         <module>seckill-api</module>
-        <module>Personal-Center</module>
+        <module>personal-center-api</module>
     </modules>
     <dependencies>
         <dependency>
