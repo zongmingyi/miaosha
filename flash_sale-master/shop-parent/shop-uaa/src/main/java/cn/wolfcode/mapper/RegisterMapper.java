@@ -1,7 +1,9 @@
 package cn.wolfcode.mapper;
 
 import cn.wolfcode.domain.Register;
+import org.apache.ibatis.annotations.Mapper;
 
+@Mapper
 public interface RegisterMapper {
 
     /**
@@ -16,5 +18,5 @@ public interface RegisterMapper {
      * @param phone 电话
      * @return 用户
      */
-    Register searchByPhone(long phone);
+    Register searchByPhone(Long phone);
 }
