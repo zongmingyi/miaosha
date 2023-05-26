@@ -8,6 +8,7 @@ import cn.wolfcode.mapper.RegisterMapper;
 import cn.wolfcode.service.IRegisterService;
 import cn.wolfcode.util.MD5Util;
 import cn.wolfcode.web.msg.RegisterCodeMsg;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -17,14 +18,16 @@ import java.util.UUID;
 @Service
 public class RegisterServiceImpl implements IRegisterService {
 
+    @Autowired
     private RegisterMapper registerMapper;
     @Override
-    public void register(Register register) {
+    public int register(Register register) {
         //判断手机号是否为空
         if(null == register.getPhone()){
             throw new PhoneIsNullException(RegisterCodeMsg.PHONE_IS_NULL);
         }
         //查询是否该手机号已被注册
+
         Register result = registerMapper.searchByPhone(register.getPhone());
         if(result != null){
             throw new InsertException(RegisterCodeMsg.DUPLICATE_REGISTER);
@@ -45,5 +48,6 @@ public class RegisterServiceImpl implements IRegisterService {
         if(rows != 1){
             throw new InsertFailException(RegisterCodeMsg.REGISTER_FAIL);
         }
+        return rows;
     }
 }
