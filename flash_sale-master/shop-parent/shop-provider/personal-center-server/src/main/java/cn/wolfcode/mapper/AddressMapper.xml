@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="cn.wolfcode.mapper.AddressMapper">
+
+    <resultMap id="AddressMap" type="cn.wolfcode.domain.Address">
+        <id column="id" property="id"></id>
+        <result column="aid" property="aid"></result>
+        <result column="uid" property="uid"></result>
+        <result column="name" property="name"></result>
+        <result column="phone" property="phone"></result>
+        <result column="province" property="province"></result>
+        <result column="city" property="city"></result>
+        <result column="address" property="address"></result>
+        <result column="is_default" property="isDefault"></result>
+        <result column="create_user" property="createUser"></result>
+        <result column="create_time" property="createTime"></result>
+        <result column="modify_user" property="modifyUser"></result>
+        <result column="modify_time" property="modifyTime"></result>
+    </resultMap>
+
+    <select id="selectAddressCountByUID" resultType="java.lang.Integer">
+        select count(*) from address where uid= #{uid}
+    </select>
+    <insert id="addAddressByUID">
+        insert into address(
+        uid,name,phone,province,city,address,
+        is_default,create_user,create_time,modify_user,modify_time)
+        values (
+        #{uid},#{name},#{phone},#{province},#{city},#{address},
+        #{isDefault},#{createUser},#{createTime},#{modifyUser},#{modifyTime}
+        )
+    </insert>
+    <update id="changeAddressByUID">
+        update address set name=#{name},phone=#{phone},province=#{province},
+                           city=#{city},address=#{address},modify_user=#{modeifyUser},
+                           modify_time=#{modifyTime}
+    </update>
+</mapper>
