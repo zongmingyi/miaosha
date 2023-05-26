@@ -16,13 +16,13 @@ public class CreateCaptcha {
 
     private int width = 80;//图片宽
     private int height = 26;//图片高
-    private int lineSize = 40;//干扰线数量
-    private int stringNum = 6;//随机产生字符数量
+    private int lineSize = 5;//干扰线数量
+    private int stringNum = 4;//随机产生字符数量
     /**
      * 验证码的字体
      */
     private Font getFont(){
-        return new Font("Fixedsys",Font.CENTER_BASELINE,18);
+        return new Font("Fixedsys",Font.CENTER_BASELINE,24);
     }
 
     /**
@@ -61,14 +61,14 @@ public class CreateCaptcha {
         BufferedImage image = new BufferedImage(width,height,BufferedImage.TYPE_INT_BGR);
         Graphics graphics = image.getGraphics();//这样该对象就可以图像上进行修改操作
         graphics.fillRect(0,0,width,height);
-        graphics.setFont(new Font("Times New Roman",Font.ROMAN_BASELINE,18));
+        graphics.setFont(new Font("Times New Roman",Font.ROMAN_BASELINE,24));
         graphics.setColor(getRandColor(110,133));
         //干扰线
         for(int i = 0;i <= lineSize; ++i){
             drowLine(graphics);
         }
         //绘制字符串
-        graphics.drawString(captchaCode,10,10);
+        graphics.drawString(captchaCode,20,20);
         graphics.dispose();
         return image;
     }
