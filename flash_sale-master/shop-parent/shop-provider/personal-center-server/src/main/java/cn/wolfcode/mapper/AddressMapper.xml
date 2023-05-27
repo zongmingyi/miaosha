@@ -34,5 +34,6 @@
         update address set name=#{name},phone=#{phone},province=#{province},
                            city=#{city},address=#{address},modify_user=#{modeifyUser},
                            modify_time=#{modifyTime}
+        where uid=#{uid} and aid=#{aid}
     </update>
 </mapper>

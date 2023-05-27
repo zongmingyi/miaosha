@@ -2,6 +2,8 @@ package cn.wolfcode.mapper;
 
 import cn.wolfcode.domain.Address;
 
+
+
 public interface AddressMapper {
     /**
      * 根据用户id查询用户的收货地址数量
@@ -24,7 +26,7 @@ public interface AddressMapper {
      * @param uid 用户id
      * @return
      */
-    Integer changeAddressByUID(Address address, Integer uid);
+    Integer changeAddressByUID(Address address, Integer uid,Integer aid);
 
     /**
      * 设置默认地址
