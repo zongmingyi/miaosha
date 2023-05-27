@@ -65,10 +65,5 @@
             <artifactId>product-api</artifactId>
             <version>1.0.0</version>
         </dependency>
-        <dependency>
-            <groupId>cn.wolfcode</groupId>
-            <artifactId>shop-common</artifactId>
-            <version>1.0.0</version>
-        </dependency>
     </dependencies>
 </project>
