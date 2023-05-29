@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>用户 WebSocket</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h1>用户</h1>
+<input type="text" id="inputMessage" placeholder="Type message here...">
+<button type="button" onclick="getMessage()">Send Message</button>
+<div id="messages"></div>
+
+<script type="text/javascript">
+  //1，获取连接，new WebSocket()
+  //获取到路径url的参数（用户的手机号，这里将手机号作为了用户的唯一标识）
+  var accounta=window.location.search;
+  var account=accounta.slice(9);
+  //发送人id
+  var sb=account;
+  //将发送人id参数传给服务端
+  var wsUrl="ws://127.0.0.1:8900/chatServer";
+  var allUrl=wsUrl+"/"+sb;
+  //接收人id
+  var jsrid='超级管理员';
+  //客户端与服务端建立连接，建立连接以后，它会发出一个ws.open事件
+  var ws=new WebSocket(allUrl);
+  //连接成功后就将接收人id发送给服务端
+  ws.onopen=function(){
+    ws.send(jsrid);
+  }
+  //客户端收到服务端发送的消息
+  ws.onmessage=function(message){
+    var shenfen=JSON.stringify(message.data).toString();
+    var shenfens=shenfen.slice(shenfen.lastIndexOf("|")+1,-1);
+    //这里通过很low的方式拿到了发送人id  [shenfens]（后台拼接字符串并前台截取得到）
+    //判断发送人id是否和页面初始化时的接收人id（jsrid）是否一致，相同则说明是对方回复的消息，并将该消息添加到自己的聊天框；如果收到的发送人id与“大白机器人”或者是和自己的id一致，也要将消息添加到自己的聊天框（自己发的消息嘛）
+    if(jsrid==shenfens||shenfens=="大白机器人："||shenfens==sb){
+      //获取以后，在客户端显示
+      messages.innerHTML+=message.data;
+    }else{
+      //不做任何操作
+    }
+  }
+  //获取某个用户输入的聊天内容，并发送到服务端
+  function getMessage(){
+    var inputMessage=document.getElementById("inputMessage").value;
+    //alert(inputMessage);
+    //获取消息以后，要发送给服务端，然后广播给所有用户
+    if(typeof(inputMessage)=='undefined'){
+      alert("请输入您要发送的消息！");
+    }else{
+      ws.send(inputMessage);
+      //输入框消息清空
+      inputMessage.value="";
+    }
+  }
+  //当关闭页面或者用户退出时，会执行一个ws.close()方法
+  window.onbeforeunload=function(){
+    ws.close();
+  }
+  //按回车发送信息
+  document.onkeyup=function(e){
+    if(e.keyCode==13){
+      getMessage();
+      inputMessage.value="";
+    }
+  }
+</script>
+
+</body>
+</html>

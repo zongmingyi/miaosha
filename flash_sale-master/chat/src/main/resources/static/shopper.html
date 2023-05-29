@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>商家 WebSocket</title>
+  <meta charset="UTF-8">
+</head>
+<body>
+<h1>商家</h1>
+<input type="text" id="inputMessage" placeholder="Type message here...">
+<button type="button" onclick="getMessage()">Send Message</button>
+<div id="messages"></div>
+
+<script>
+  var name="";
+  $(function () {
+    $.post(
+            "/demo/getName",
+            function (data) {
+              name=data.name;
+            },
+            "json"
+    );
+    //得到未读消息并展示到列表中（当点击其中一个未读消息时会得到该消息的账号（前台用户的userId唯一标识））
+    $.post(
+            "/demo/getweidu",
+            function (data) {
+              var temp='';
+              var count=0;
+              var account='';
+              for(var i=0;i<data.length;i++){
+                temp+='<div class="yonghu" onclick="liaotian('+data[i].account+')">\n' +
+                        '            <span id="lalala">'+data[i].account+'</span>\n' +
+                        '            <div id="'+data[i].account+'" class="weidu">'+data[i].count+'</div>\n' +
+                        '        </div>';
+              }
+              $("#nav").append(temp);
+            }
+    );
+  });
+
+  //这是点击对应的未读消息之后将未读消息展示到客服的聊天框
+  var sb=null;
+  function liaotian(v) {  //下面的websocket内容在这个方法里面，执行这个点击事件之后触发websocket连接
+    sb=v;
+    $("#content").empty();
+    $("#"+v).hide();
+    $.post(
+            "/demo/getxiaoxi",
+            {account:v},
+            function (data) {
+              // alert(JSON.stringify(data));
+              var str='';
+              for(var i=0;i<data.length;i++){
+                var time=data[i].addtime.slice(0,10);
+                str+=' <div class="message"><span>'+data[i].account+'</span>用户：<span>'+time+'</span>'+data[i].message+'</div>';
+              }
+              $("#content").append(str);
+            },
+            "json"
+    );
+    //将点击后的未读消息改为已读消息
+    $.post(
+            "/demo/changeYD",
+            {account:v},
+            function (data) {
+              console.log(data);
+            }
+    );
+    //发送人id（超级管理员写死的，上面说过了）
+    var wsUrl="ws://127.0.0.1:8082/charRoomServer";
+    var allUrl=wsUrl+"/"+"超级管理员";
+    //客户端与服务端建立连接，建立连接以后，它会发出一个ws.open事件
+    var ws=new WebSocket(allUrl);
+    //接收人userId
+    var jsrid=sb;
+    //连接成功后，提示浏览器客户端输入名称
+    ws.onopen=function(){
+      ws.send(jsrid);
+    }
+    //客户端收到服务端发送的消息
+    ws.onmessage=function(message){
+      //截取到普通用户的手机号
+      var shenfen=JSON.stringify(message.data).toString();
+      var shenfens=shenfen.slice(shenfen.lastIndexOf("|")+1,-1);
+      console.log("身份："+shenfens);
+      // //判断发送人id是否和页面初始化时的接收人id（jsrid）是否一致，相同则说明是对方回复的消息
+      if(jsrid==shenfens||"超级管理员"==shenfens){
+        //获取以后，在客户端显示
+        content.innerHTML+=message.data;
+      }else{
+        //不做任何操作
+      }
+    }
+    //获取某个用户输入的聊天内容，并发送到服务端
+    function getMessage(){
+      var inputMessage=document.getElementById("inputMessage").value;
+      //alert(inputMessage);
+      //获取消息以后，要发送给服务端，然后广播给所有用户
+      if(typeof(inputMessage)=='undefined'){
+        alert("请输入您要发送的消息！");
+      }else{
+        ws.send(inputMessage);
+        //输入框消息清空
+        inputMessage.value="";
+      }
+    }
+    //当关闭页面或者用户退出时，会执行一个ws.close()方法
+    window.onbeforeunload=function(){
+      ws.close();
+    }
+    //按回车发送信息
+    document.onkeyup=function(e){
+      if(e.keyCode==13){
+        getMessage();
+        inputMessage.value="";
+      }
+    }
+  }
+</script>
+
+
+</body>
+</html>

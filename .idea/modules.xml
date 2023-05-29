@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/flash_sale-master/shop-parent/api-gateway/api-gateway.iml" filepath="$PROJECT_DIR$/flash_sale-master/shop-parent/api-gateway/api-gateway.iml" />
       <module fileurl="file://$PROJECT_DIR$/flash_sale-master/shop-parent/canal-client/canal-client.iml" filepath="$PROJECT_DIR$/flash_sale-master/shop-parent/canal-client/canal-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/chat.iml" filepath="$PROJECT_DIR$/chat.iml" />
       <module fileurl="file://$PROJECT_DIR$/flash_sale-master/frontend-server/frontend-server.iml" filepath="$PROJECT_DIR$/flash_sale-master/frontend-server/frontend-server.iml" />
       <module fileurl="file://$PROJECT_DIR$/flash_sale-master/shop-parent/shop-provider-api/intergral-api/intergral-api.iml" filepath="$PROJECT_DIR$/flash_sale-master/shop-parent/shop-provider-api/intergral-api/intergral-api.iml" />
       <module fileurl="file://$PROJECT_DIR$/flash_sale-master/shop-parent/shop-provider/intergral-server/intergral-server.iml" filepath="$PROJECT_DIR$/flash_sale-master/shop-parent/shop-provider/intergral-server/intergral-server.iml" />

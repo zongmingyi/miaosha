@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<input type="button" value="连接服务器" onclick="connect()"/>
+<input type="text" id="content"> <input type="button" value="发送消息" onclick="send()">
+</body>
+<script>
+  var socket;
+  function connect(){
+    if(null == socket){
+      socket = new WebSocket("ws://localhost:8900");
+    }
+  }
+  function send(){
+      if(socket != null){
+          var content1 = $("content").val();
+          socket.send("/chat",JSON.stringify({
+           content: content1,
+           sender:'a', receiver: 'b'
+          }
+          ));
+      }
+  }
+</script>
+</html>
